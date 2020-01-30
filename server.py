@@ -1,6 +1,8 @@
 import requests
 from flask import Flask
 from flask import Response
+from flask import request
+import urllib
 
 app = Flask(__name__)
 
@@ -15,9 +17,10 @@ def gyazo(hash):
     return r
 
 
-@app.route('/http/<url>')
-def http(url):
-    url = f"http://{url}"
+@app.route('/get/')
+def get():
+    url = request.args["q"]
+    url = urllib.parse.unquote(url)
     r = requests.get(url, allow_redirects=True)
     r = Response(r.content, mimetype="image/png")
     r.headers['Access-Control-Allow-Origin'] = '*'
