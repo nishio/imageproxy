@@ -13,3 +13,13 @@ def gyazo(hash):
     r.headers['Access-Control-Allow-Origin'] = '*'
     r.headers['Cache-Control'] = 'max-age = 31536000'
     return r
+
+
+@app.route('/http/<url>')
+def http(url):
+    url = f"http://{url}"
+    r = requests.get(url, allow_redirects=True)
+    r = Response(r.content, mimetype="image/png")
+    r.headers['Access-Control-Allow-Origin'] = '*'
+    r.headers['Cache-Control'] = 'max-age = 31536000'
+    return r
