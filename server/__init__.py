@@ -6,6 +6,8 @@ import urllib
 
 app = Flask(__name__)
 
+def create_app():
+    return app
 
 @app.route('/gyazo.com/<hash>')
 def gyazo(hash):
